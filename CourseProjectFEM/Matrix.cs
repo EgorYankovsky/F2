@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class Matrix
 {
@@ -23,8 +17,7 @@ public class Matrix
       Size = size;
    }
 
-   public void Clear()
-       => Array.Clear(_container, 0, _container.Length);
+   public void Clear() => Array.Clear(_container, 0, _container.Length);
 
    public static void Copy(Matrix source, Matrix destination)
    {
@@ -40,7 +33,6 @@ public class Matrix
       for (int i = 0; i < resultMatrix.Size; i++)
          for (int j = 0; j < resultMatrix.Size; j++)
             resultMatrix[i, j] = fstMatrix[i, j] + sndMatrix[i, j];
-
       return resultMatrix;
    }
 

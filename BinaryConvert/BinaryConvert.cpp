@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 // заполняется руками:
 const int kUzlov = 920;    // количество узлов
 const int Ktr = 858; // количество конечных элементов (треугольников)
@@ -18,8 +17,6 @@ const int Count4 = Ktr * 4; // количество целых чисел для
 
 // пути к файлам 
 string path = "D:/TELMA/lab_var1/";
-
-
 
 // Чтение и запись с использованием класса stream по 6 чисел
 int ReadFirtsConds(string nameIn, string nameOut)
@@ -178,8 +175,6 @@ int ReadCoords(string nameIn, string nameOut)
 
 int main()
 {
-
-
 	setlocale(LC_ALL, "");
 
 	string elems = "nvtr_treug";

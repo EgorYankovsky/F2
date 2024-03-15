@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class Vector : ICloneable
 {
@@ -21,8 +13,8 @@ public class Vector : ICloneable
 
    public double this[int i]
    {
-      get { return _container[i]; }
-      set { _container[i] = value; }
+      get => _container[i];
+      set => _container[i] = value;
    }
 
    // Складывает два вектора, помещает результат в третий.

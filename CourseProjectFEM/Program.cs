@@ -20,7 +20,6 @@ mesh.ReadMesh(ELEMENTS, POINTS, BOUNDARY_CONDITIONS);
 var fem = new FEM(false);
 fem.SetMesh(mesh);
 fem.SetSolver(new BCG(1e-14, 3000));
-//fem.SetSolver(new LU());
 
 fem.Compute();
 
@@ -40,9 +39,7 @@ List<double> By = new();
 Console.WriteLine("Az:");
 
 for (int i = 0; i < points.Length; i++)
-{
    Console.WriteLine(@"{0:e8}" ,fem.GetSolutionAtPoint(points[i]));
-}
 
 
 double step = 1e-10; // Хороший для Bx
@@ -74,8 +71,6 @@ for (int i = 0; i < points.Length; i++)
 
 Console.WriteLine("|B|:");
 for (int i = 0; i < points.Length; i++)
-{
    Console.WriteLine(@"{0:e8}", Math.Sqrt(Bx[i] * Bx[i] + By[i] * By[i]));
-}
 
 fem.ToPythonMeshVisualization(ELEMS_OUT, POINTS_OUT, SOLUTION_OUT);

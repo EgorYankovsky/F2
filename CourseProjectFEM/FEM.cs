@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class FEM
 {
@@ -25,8 +17,6 @@ public class FEM
 
    public FEM(bool isNonLinear)
    {
-
-
       _localStiffness = new(NodesPerElement);
       _localVector = new(NodesPerElement);
 
@@ -40,10 +30,8 @@ public class FEM
       _isNonLinear = isNonLinear;
    }
 
-   public void SetSolver(Solver solver)
-      => _solver = solver;
-   public void SetMesh(Mesh mesh)
-   => _mesh = mesh;
+   public void SetSolver(Solver solver) => _solver = solver;
+   public void SetMesh(Mesh mesh) => _mesh = mesh;
 
 
    public void Compute()
@@ -75,9 +63,7 @@ public class FEM
       int ielem = FindElementByPoint(point);
 
       if (ielem < 0)
-      {
          return 0;
-      }
 
       double solution = 0;
 
@@ -95,12 +81,6 @@ public class FEM
       solution += _solution[_mesh.Elements[ielem][3]] * (point.X - hx.LeftBoundary) / hx.Length * (point.Y - hy.LeftBoundary) / hy.Length;
 
       return solution;
-   }
-
-
-   public void PrintErrorNorm()
-   {
-
    }
 
    public void BuildPortrait()
@@ -155,7 +135,7 @@ public class FEM
 
       double coeffG1 = hy / hx / 6;
       double[,] matrixG1 =
-{
+      {
          { 2.0, -2.0, 1.0, -1.0 },
          { -2.0, 2.0, -1.0, 1.0 },
          { 1.0, -1.0, 2.0, -2.0 },
@@ -164,7 +144,7 @@ public class FEM
 
       double coeffG2 = hx / hy / 6;
       double[,] matrixG2 =
-{
+      {
          { 2.0, 1.0, -2.0, -1.0 },
          { 1.0, 2.0, -1.0, -2.0 },
          { -2.0, -1.0, 2.0, 1.0 },
@@ -205,7 +185,6 @@ public class FEM
 
             // В матрицу жёсткости запишу всю локальную А.
             _localStiffness[i, j] = 1.0 / Parameters.Mu(material) * (coeffG1 * matrixG1[i, j] + coeffG2 * matrixG2[i, j]);
-            //_localStiffness[i, j] = _integrator.Gauss2D(gradPsiGradPsi, templateElement);
             _tempMass[i, j] = matrixM[i, j];
          }
       }
@@ -230,16 +209,12 @@ public class FEM
             }
 
             if (_mesh.Elements[ielem][i] > _mesh.Elements[ielem][j])
-            {
                for (int icol = _globalMatrix._ia[_mesh.Elements[ielem][i]]; icol < _globalMatrix._ia[_mesh.Elements[ielem][i] + 1]; icol++)
-               {
                   if (_globalMatrix._ja[icol] == _mesh.Elements[ielem][j])
                   {
                      _globalMatrix._al[icol] += _localStiffness[i, j];
                      break;
                   }
-               }
-            }
          }
       }
    }
@@ -253,7 +228,6 @@ public class FEM
    private void AccountSecondConditions()
    {
       for (int i = 0; i < _mesh.BoundaryRibs2.Count; i++)
-      {
          for (int j = 0; j < _mesh.BoundaryRibs2[i].Count; j++)
          {
             double h = Math.Max
@@ -268,7 +242,6 @@ public class FEM
             _globalVector[i] += h / 6.0 * (2.0 * Theta1 + Theta2);
             _globalVector[_mesh.BoundaryRibs2[i][j]] += h / 6.0 * (Theta1 + 2.0 * Theta2);
          }
-      }
    }
 
    private void AccountFirstConditions()
@@ -288,16 +261,12 @@ public class FEM
             _globalMatrix._al[i] = 0;
 
          for (int col = row + 1; col < _globalMatrix.Size; col++)
-         {
             for (int j = _globalMatrix._ia[col]; j < _globalMatrix._ia[col + 1]; j++)
-            {
                if (_globalMatrix._ja[j] == row)
                {
                   _globalMatrix._au[j] = 0;
                   break;
                }
-            }
-         }
       }
    }
 
@@ -309,14 +278,9 @@ public class FEM
          var rightUpper = _mesh.Points[_mesh.Elements[i][3]];
 
          if (leftBottom.X <= point.X && point.X <= rightUpper.X)
-         {
             if (leftBottom.Y <= point.Y && point.Y <= rightUpper.Y)
-            {
                return i;
-            }
-         }
       }
-
       return -1;
    }
 
@@ -336,9 +300,7 @@ public class FEM
             for (int i = 0; i < _mesh.Elements.Count; i++)
             {
                for (int j = 0; j < NodesPerElement; j++)
-               {
                   sw.Write($"{_mesh.Elements[i][j]} ");
-               }
                sw.WriteLine($"{_mesh.ElementMaterials[i]}");
             }
 
@@ -347,10 +309,7 @@ public class FEM
          using (var sw = new StreamWriter(solutionPath))
          {
             for (int i = 0; i < _solution.Size; i++)
-            {
                sw.WriteLine(@"{0:e14}", _solution[i]);
-
-            }
          }
       }
       catch (Exception ex)

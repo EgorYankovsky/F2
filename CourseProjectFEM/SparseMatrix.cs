@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class SparseMatrix
 {
@@ -80,9 +73,7 @@ public class SparseMatrix
    {
       int sizeOffDiag = 0;
       for (int i = 0; i < Size; i++)
-      {
          sizeOffDiag += i - _ja[_ia[i]];
-      }
 
       SparseMatrix result = new(Size, sizeOffDiag);
 
@@ -120,14 +111,10 @@ public class SparseMatrix
    public static void Copy(SparseMatrix source, SparseMatrix destination)
    {
       for (int i = 0; i < destination.Size + 1; i++)
-      {
          destination._ia[i] = source._ia[i];
-      }
 
       for (int i = 0; i < destination.Size; i++)
-      {
          destination._di[i] = source._di[i];
-      }
 
       for (int i = 0; i < destination._ja.Length; i++)
       {
@@ -135,10 +122,5 @@ public class SparseMatrix
          destination._al[i] = source._al[i];
          destination._au[i] = source._au[i];
       }
-   }
-
-   public void PrintDenseToConsole()
-   {
-
    }
 }

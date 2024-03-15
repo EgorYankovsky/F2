@@ -7,49 +7,30 @@ public class Parameters
    public static double Mu(int material, Point2D? point = null, bool isNonLinear = false)
    {
       if (isNonLinear is true)
-      {
          return point!.X;
-      }
 
-
-      double value = material switch
+      return material switch
       {
-         0 => Mu0 * 1000,
-         1 => Mu0 * 1,
-         2 => Mu0 * 1,
-         3 => Mu0 * 1,
-         _ => Mu0 * 1
+          0 => Mu0 * 1000,
+          1 => Mu0 * 1,
+          2 => Mu0 * 1,
+          3 => Mu0 * 1,
+          _ => Mu0 * 1
       };
+    }
 
-      return value;
-   }
-
-   public static double F(int material, Point2D? point = null)
+   public static double F(int material, Point2D? point = null) => material switch
    {
-      double value = material switch
-      {
-         0 => 0.0,
-         1 => 0.0,
-         2 => 1.0e6,
-         3 => -1.0e6,
-         _ => 0.0
-      };
+       0 => 0.0,
+       1 => 0.0,
+       2 => 1.0e6,
+       3 => -1.0e6,
+       _ => 0.0
+   };
+     
+   public static double U(Point2D point) => 0.0;
 
-      return value;
-   }
+   public static double Ug1(Point2D point) => 0.0;
 
-   public static double U(Point2D point)
-   {
-      return 0.0;
-   }
-
-   public static double Ug1(Point2D point)
-   {
-      return 0.0;
-   }
-
-   public static double dU_dn(Point2D point)
-   {
-      return 0.0;
-   }
+   public static double dU_dn(Point2D point) => 0.0;
 }

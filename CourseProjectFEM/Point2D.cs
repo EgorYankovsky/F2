@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class Point2D
 {
@@ -17,10 +11,7 @@ public class Point2D
       Y = y;
    }
 
-   public override string ToString()
-   {
-      return $"{X:e15} {Y:e15}";
-   }
+   public override string ToString() => $"{X:e15} {Y:e15}";
 
    public static Point2D operator +(Point2D a, Point2D b)
       => new Point2D(a.X + b.X, a.Y + b.Y);

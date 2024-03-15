@@ -45,10 +45,7 @@ public static class Gauss5
       double result = 0;
 
       for (int iweight = 0; iweight < _points.Length; iweight++)
-      {
          result += _weights[iweight] * function.Compute(master_interval.Length / 2 * _points[iweight] + master_interval.Center, interval, i, j);
-      }
-
       return master_interval.Length / 2 * result;
    }
 }

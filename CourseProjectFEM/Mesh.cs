@@ -142,12 +142,6 @@ public class Mesh
 
    public void Build()
    {
-      // Разбиение каждой области в соответствии с её параметрами:
-      // количеством разбиений;
-      // коэффициенте разрядки.
-
-      // По времени
-
       {
          double h;
          double sum = 0;
@@ -214,13 +208,10 @@ public class Mesh
       }
       _meshLinesY.Add(_linesY.Last());
 
-      // Сборка списка узлов.
-      // Узлы нумеруются слева направо, снизу вверх.
       for (int i = 0; i < _meshLinesY.Count; i++)
          for (int j = 0; j < _meshLinesX.Count; j++)
             _points.Add(new(_meshLinesX[j], _meshLinesY[i]));
 
-      // Сборка списка элементов.
       int splitsX = _splitsX.Sum();
       int splitsY = _splitsY.Sum();
       int correction = 0;
@@ -241,13 +232,10 @@ public class Mesh
          correction++;
       }
 
-      // TODO: Ща будет кринж с определением краевых нодов и фэйковых.
       for (int i = 0; i < _points.Count; i++)
       {
          for (int j = 0; j < _boundaryConditions.Count; j++)
-         {
             if (_linesX[_boundaryConditions[j][2] - 1] <= _points[i].X && _points[i].X <= _linesX[_boundaryConditions[j][3] - 1])
-            {
                if (_linesY[_boundaryConditions[j][4] - 1] <= _points[i].Y && _points[i].Y <= _linesY[_boundaryConditions[j][5] - 1])
                {
                   if (_boundaryConditions[j][0] == 1)
@@ -256,21 +244,15 @@ public class Mesh
                      _boundaryNodes2.Add(i);
                   //break;
                }
-            }
-         }
-
+      
          for (int j = 0; j < _areas.Length; j++)
-         {
             if (_linesX[_areas[j].Item2] <= _points[i].X && _points[i].X <= _linesX[_areas[j].Item3])
-            {
                if (_linesY[_areas[j].Item4] <= _points[i].Y && _points[i].Y <= _linesY[_areas[j].Item5])
                {
                   _areaNodes.Add(i, j);
                   break;
                }
-            }
-         }
-
+      
          if(!_areaNodes.ContainsKey(i))
             _fictiveNodes.Add(i);
       }

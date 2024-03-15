@@ -38,9 +38,7 @@ public static class Quadratures
         };
 
         for (int i = 0; i < n; i++)
-        {
             yield return new(points[i], weights[i]);
-        }
     }
 
     public static IEnumerable<QuadratureNode<double>> SegmentGaussOrder9()
@@ -65,8 +63,6 @@ public static class Quadratures
         };
 
         for (int i = 0; i < n; i++)
-        {
             yield return new(points[i], weights[i]);
-        }
     }
 }

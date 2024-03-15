@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM_PR2;
+﻿namespace FEM_PR2;
 
 public class Interval
 {
@@ -21,9 +15,7 @@ public class Interval
          RightBoundary = rightBoundary;
       }
       else
-      {
          throw new ArgumentException("Неверно задан интервал.");
-      }
    }
 
    public static Interval Parse(string parseString)
@@ -35,8 +27,5 @@ public class Interval
    public bool Contains(double point)
     => LeftBoundary <= point && point <= RightBoundary;
 
-   public override string ToString()
-   {
-      return $"[{LeftBoundary}; {RightBoundary}]";
-   }
+   public override string ToString() => $"[{LeftBoundary}; {RightBoundary}]";
 }
