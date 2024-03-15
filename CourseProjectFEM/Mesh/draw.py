@@ -14,7 +14,7 @@ q = []
 
 fig, ax = plt.subplots(1)
 
-hardPathPc = 'C:\\Users\\Dmitry\\Desktop\\CourseProjectFEM-master\\CourseProjectFEM\\bin\Debug\\net8.0\\Mesh'
+hardPathPc = 'Z:\\work\\F2\\CourseProjectFEM\\Mesh\\'
 
 file1 = "points.txt"
 path1 = os.path.join(hardPathPc, file1)
@@ -57,7 +57,6 @@ with open(path3) as file:
 
 qmin = np.min(q)
 qmax = np.max(q)
-
 
 def man_cmap(cmap, value=1.):
     colors = cmap(np.arange(cmap.N))

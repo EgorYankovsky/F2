@@ -8,11 +8,9 @@ const string ELEMENTS = "BinaryConvert/elemsPr.txt";
 const string POINTS = "BinaryConvert/coords.txt";
 const string BOUNDARY_CONDITIONS = "BinaryConvert/firstConds.txt";
 
-
 const string ELEMS_OUT = "Mesh/elements.txt";
 const string POINTS_OUT = "Mesh/points.txt";
 const string SOLUTION_OUT = "Mesh/q.txt";
-
 
 var mesh = new Mesh();
 mesh.ReadMesh(ELEMENTS, POINTS, BOUNDARY_CONDITIONS);
@@ -22,7 +20,6 @@ fem.SetMesh(mesh);
 fem.SetSolver(new BCG(1e-14, 3000));
 
 fem.Compute();
-
 
 Point2D[] points = 
 {
@@ -41,8 +38,7 @@ Console.WriteLine("Az:");
 for (int i = 0; i < points.Length; i++)
    Console.WriteLine(@"{0:e8}" ,fem.GetSolutionAtPoint(points[i]));
 
-
-double step = 1e-10; // Хороший для Bx
+double step = 1e-10;
 Point2D pointStepX = new(step, 0);
 Point2D pointStepY = new(0, step);
 

@@ -56,43 +56,6 @@ int ReadFirtsConds(string nameIn, string nameOut)
 	return(0);
 }
 
-int ReadElems(string nameIn, string nameOut)
-{
-	int i;
-	int N6 = 0; // число успешно прочитанных чисел
-	int N4 = 0; // число успешно записанных чисел
-
-	cout << endl << " Класс stream, по 6 чисел:  ";
-
-	struct elem4 { int ver1, ver2, ver3, nmat; } rec;
-
-	ifstream binfile_in(path + nameIn, ios::binary); if (!binfile_in.is_open()) return(-1);
-	ofstream txtfile_out(nameOut);	if (!txtfile_out.is_open()) { binfile_in.close(); return(-1); }
-
-	txtfile_out << Ktr * 2 << endl;
-
-	for (i = 0; i < Ktr * 2; i++)
-	{
-		binfile_in.read((char*)&rec, sizeof(rec));
-		N6 += binfile_in.gcount() / sizeof(int);
-
-		/* записываем только первые 4 числа записи в текстовый файл*/
-		txtfile_out << rec.ver1 << " " << rec.ver2 << " " << rec.ver3 << " " << rec.nmat << endl;
-		if (txtfile_out.fail()) break; // проверка, что запись 4х чисел прошла успешно
-
-		N4 += 4;
-	}
-
-	binfile_in.close();
-	txtfile_out.close();
-
-	cout << " прочитано=" << N6 << ", записано=" << N4 << endl;
-
-	if (N6 != Ktr * 8) return(-2);
-	if (N4 != Ktr * 8) return(-3);
-	return(0);
-}
-
 int ReadElemsPr(string nameIn, string nameInMat, string nameOut)
 {
 	int i;
@@ -184,10 +147,6 @@ int main()
 
 	cout << "Первые краевые ... ";
 	if (ReadFirtsConds(firstConds, "firstConds.txt") == 0) cout << "удачно.\n";
-	else cout << "неудачно.\n";
-
-	cout << "Элементы ... ";
-	if (ReadElems(elems, "elemsTr.txt") == 0) cout << "удачно.\n";
 	else cout << "неудачно.\n";
 
 	cout << "Элементы ... ";

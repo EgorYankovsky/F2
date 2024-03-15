@@ -19,7 +19,8 @@ public class Parameters
       };
     }
 
-   public static double F(int material, Point2D? point = null) => material switch
+   public static double F(int material, Point2D? point = null) 
+   => material switch
    {
        0 => 0.0,
        1 => 0.0,
@@ -27,10 +28,7 @@ public class Parameters
        3 => -1.0e6,
        _ => 0.0
    };
-     
-   public static double U(Point2D point) => 0.0;
 
    public static double Ug1(Point2D point) => 0.0;
-
    public static double dU_dn(Point2D point) => 0.0;
 }

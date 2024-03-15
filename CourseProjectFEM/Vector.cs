@@ -12,24 +12,10 @@ public class Vector : ICloneable
    }
 
    public double this[int i]
-   {
-      get => _container[i];
-      set => _container[i] = value;
-   }
-
-   // Складывает два вектора, помещает результат в третий.
-   public static void Addition(Vector vector1, Vector vector2, Vector result)
-   {
-      for (int i = 0; i < vector1.Size; i++)
-         result[i] = vector1[i] + vector2[i];
-   }
-
-   // Добавляет вектор значений к текущему экземпляру.
-   public void Addition(Vector vector)
-   {
-      for (int i = 0; i < Size; i++)
-         this[i] += vector[i];
-   }
+    {
+        get => _container[i];
+        set => _container[i] = value;
+    }
 
    public void Fill(double value)
    {
